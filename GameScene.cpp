@@ -32,6 +32,7 @@ void GameScene::Initialize() {
 void GameScene::Update() {
 
 	ball_->Update();
+	reflector_->Update();
 
 	#ifdef _DEBUG // デバッグモードのみ有効
 
