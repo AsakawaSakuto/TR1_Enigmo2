@@ -25,9 +25,6 @@
     <Filter Include="ソース ファイル\Reflector">
       <UniqueIdentifier>{a11ed80d-c627-4841-8b93-038871573aa8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Math">
-      <UniqueIdentifier>{1841b01a-42d4-4a34-b4bc-a77fa1c5f593}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
