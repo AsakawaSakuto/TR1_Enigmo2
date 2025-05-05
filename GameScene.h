@@ -4,6 +4,7 @@ using namespace KamataEngine;
 #include "vector"
 #include "Ball.h"
 #include "Reflector.h"
+#include <cmath>
 
 // ゲームシーン
 class GameScene {
@@ -35,7 +36,11 @@ private:
 
 	uint32_t textureReflector = 0u;
 
-	void ReflectBallIfHit(Ball* ball, Reflector* reflector);
+	Vector3 Normalize(const Vector3& v);
+
+	Vector3 Reflect(const Vector3& velocity, const Vector3& normal);
+
+	void ReflectBall();
 
 	// 入力
 	Input* input_ = nullptr;

@@ -34,17 +34,16 @@ void GameScene::Initialize() {
 
 void GameScene::Update() {
 
-	ball_->Update();
-	reflector_->Update();
-
+	// Reflectorの高さに来たら反射
+	if (ball_->worldTransform_.translation_.y <= reflector_->worldTransform_.translation_.y) {
+		ReflectBall();
+	}
+	
 	if (input_->PushKey(DIK_Q)) {
 		reflector_->worldTransform_.rotation_.z += 0.1f;
 	} else if (input_->PushKey(DIK_E)) {
 		reflector_->worldTransform_.rotation_.z -= 0.1f;
 	}
-
-	// 反射処理（関数呼び出し）
-	ReflectBallIfHit(ball_, reflector_);
 
 	#ifdef _DEBUG // デバッグモードのみ有効
 
@@ -73,6 +72,10 @@ void GameScene::Update() {
 	}
 
 #endif // _DEBUG
+
+	ball_->Update();
+	reflector_->Update();
+
 }
 
 void GameScene::Draw() {
@@ -90,30 +93,29 @@ void GameScene::Draw() {
 	Model::PostDraw();
 }
 
-// 反射処理関数
-void GameScene::ReflectBallIfHit(Ball* ball, Reflector* reflector) {
-	float reflectorY = reflector->worldTransform_.translation_.y;
-	float ballRadius = 1.0f; // 必要ならBallにメンバ化してもOK
+// ベクトルの正規化
+Vector3 GameScene::Normalize(const Vector3& v) {
+	float length = std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+	if (length == 0.0f)
+		return {0, 0, 0};
+	return {v.x / length, v.y / length, v.z / length};
+}
 
-	// 反射条件：地面に接触 & 下向きのとき
-	if (ball->worldTransform_.translation_.y - ballRadius <= reflectorY && ball->velocity.y < 0.0f) {
+// ベクトルの反射処理
+Vector3 GameScene::Reflect(const Vector3& velocity, const Vector3& normal) {
+	Vector3 n = Normalize(normal);
+	float dot = velocity.x * n.x + velocity.y * n.y + velocity.z * n.z;
+	return {velocity.x - 2.0f * dot * n.x, velocity.y - 2.0f * dot * n.y, velocity.z - 2.0f * dot * n.z};
+}
 
-		// 反射処理
-		Vector3 normal = {0.0f, 1.0f, 0.0f}; // Reflectorの法線
+void GameScene::ReflectBall() {
+	// ReflectorのY軸回転から法線ベクトルを計算
+	float angleY = reflector_->worldTransform_.rotation_.z;
+	Vector3 normal = {std::sin(angleY), 0.0f, std::cos(angleY)};
 
-		float dot = ball->velocity.x * normal.x + ball->velocity.y * normal.y + ball->velocity.z * normal.z;
+	// 速度を反射
+	ball_->velocity = Reflect(ball_->velocity, normal);
 
-		// 反射公式 V' = V - 2 * (V・N) * N
-		ball->velocity.x = ball->velocity.x - 2.0f * dot * normal.x;
-		ball->velocity.y = ball->velocity.y - 2.0f * dot * normal.y;
-		ball->velocity.z = ball->velocity.z - 2.0f * dot * normal.z;
-
-		// 減衰
-		ball->velocity.x *= 0.8f;
-		ball->velocity.y *= 0.8f;
-		ball->velocity.z *= 0.8f;
-
-		// めり込み修正
-		ball->worldTransform_.translation_.y = reflectorY + ballRadius;
-	}
+	// めり込み防止のため少し上に戻す
+	ball_->worldTransform_.translation_.y = reflector_->worldTransform_.translation_.y + 0.5f;
 }
