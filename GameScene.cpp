@@ -31,6 +31,8 @@ void GameScene::Initialize() {
 
 void GameScene::Update() {
 
+	ball_->Update();
+
 	#ifdef _DEBUG // デバッグモードのみ有効
 
 	// SPACEキーで切り替え

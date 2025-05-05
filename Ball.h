@@ -28,4 +28,7 @@ private:
 	uint32_t textureHandle_ = 0u;
 	//
 	Camera* camera_ = nullptr;
+
+	Vector3 velocity = {};
+	float gravity = -0.02f;
 };
