@@ -19,6 +19,12 @@
     <Filter Include="ソース ファイル\Scene">
       <UniqueIdentifier>{1112e262-8a4a-4a92-be55-9cb1d7359696}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Ball">
+      <UniqueIdentifier>{cdc00c09-8e72-44e1-a358-bcfc2e4bde9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Reflector">
+      <UniqueIdentifier>{a11ed80d-c627-4841-8b93-038871573aa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -26,6 +32,12 @@
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>ソース ファイル\Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="Reflector.cpp">
+      <Filter>ソース ファイル\Reflector</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +92,12 @@
   <ItemGroup>
     <ClInclude Include="GameScene.h">
       <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>ソース ファイル\Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="Reflector.h">
+      <Filter>ソース ファイル\Reflector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
