@@ -35,6 +35,8 @@ private:
 
 	uint32_t textureReflector = 0u;
 
+	void ReflectBallIfHit(Ball* ball, Reflector* reflector);
+
 	// 入力
 	Input* input_ = nullptr;
 

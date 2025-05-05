@@ -19,16 +19,20 @@ public:
 	/// </summary>
 	void Draw();
 
-private:
 	//  ワールド変換データ
 	WorldTransform worldTransform_;
+
+	Vector3 velocity = {};
+
+	float gravity = -0.02f;
+
+private:
+
 	// モデル
 	Model* model_ = nullptr;
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
 	//
 	Camera* camera_ = nullptr;
-
-	Vector3 velocity = {};
-	float gravity = -0.02f;
+	
 };

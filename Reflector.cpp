@@ -11,7 +11,7 @@ using namespace std;
 
 #pragma region M
 
-namespace Matrix {
+namespace MatrixR {
 // 積
 Matrix4x4 Multiply(const Matrix4x4& m1, const Matrix4x4& m2) {
 	Matrix4x4 result{};
@@ -117,7 +117,7 @@ void Reflector::Initialize(Model* model, uint32_t textureHandle, Camera* camera)
 
 void Reflector::Update() {
 	// 行列更新
-	Matrix4x4 affinMatrix = Matrix::MakeAffineMatrix(worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
+	Matrix4x4 affinMatrix = MatrixR::MakeAffineMatrix(worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
 	worldTransform_.matWorld_ = affinMatrix;
 	// 行列を定数バッファに転送
 	worldTransform_.TransferMatrix();

@@ -19,9 +19,11 @@ public:
 	/// </summary>
 	void Draw();
 
-private:
 	//  ワールド変換データ
 	WorldTransform worldTransform_;
+
+private:
+	
 	// モデル
 	Model* model_ = nullptr;
 	// テクスチャハンドル
