@@ -40,6 +40,8 @@ private:
 
 	Vector3 Reflect(const Vector3& velocity, const Vector3& normal);
 
+	/*Vector3 GetReflectorNormal();*/
+
 	void ReflectBall();
 
 	// 入力

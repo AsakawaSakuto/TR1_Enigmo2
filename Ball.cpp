@@ -114,16 +114,12 @@ void Ball::Initialize(Model* model, uint32_t textureHandle, Camera* camera) {
 	//
 	camera_ = camera;
 
+	worldTransform_.translation_.x = 0.f;
 	worldTransform_.translation_.y = 20.f;
-	velocity = {0.f, 0.f, 0.f};
+	velocity = {0.f, -1.f, 0.f};
 }
 
 void Ball::Update() { 
-
-	velocity.y += gravity;
-
-	worldTransform_.translation_.y += velocity.y;
-
 	// 行列更新
 	Matrix4x4 affinMatrix = Matrix::MakeAffineMatrix(worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
 	worldTransform_.matWorld_ = affinMatrix;
